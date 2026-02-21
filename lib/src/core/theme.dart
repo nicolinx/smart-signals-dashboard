@@ -6,9 +6,7 @@ class AppTheme {
   static const Color cardBg = Color(0xFF1A1D23);
   static const Color border = Color.fromARGB(25, 255, 255, 255);
 
-  static const Color accentBlue = Color(0xFF3b82f6);
-  static const Color accentBlueLight = Color(0xFF60a5fa);
-
+  static const Color accentBlue = Color.fromARGB(255, 79, 146, 255);
   static const Color accentAmber = Color(0xFFF59E0B);
   static const Color accentGreen = Color(0xFF34d399);
   static const Color accentRed = Color(0xFFEF4444);

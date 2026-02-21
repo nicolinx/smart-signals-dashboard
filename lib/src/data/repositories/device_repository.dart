@@ -6,16 +6,22 @@ class DeviceRepository {
       id: 1,
       name: 'Air Conditioner',
       room: 'Living Room • Cooling',
+      valueName: 'Temperature',
+      valueUnit: '°C',
       type: DeviceType.ac,
-      value: 22.0, // Celcius
+      currentValue: 22.0,
+      targetValue: 22.0,
       isOn: true,
     ),
     const DeviceEntity(
       id: 2,
       name: 'Smart Lighting',
       room: 'Kitchen • Intensity',
+      valueName: 'Intensity',
+      valueUnit: '%',
       type: DeviceType.light,
-      value: 85.0, // Intensity
+      currentValue: 85.0,
+      targetValue: 85.0,
       isOn: true,
     ),
   ];
@@ -28,9 +34,9 @@ class DeviceRepository {
 
       if (_devices[0].type == .ac && _devices[0].isOn) {
         double drift = (DateTime.now().second % 2 == 0) ? 0.15 : -0.1;
-        double newValue = _devices[0].value + drift.clamp(16.0, 30.0);
+        double newValue = (_devices[0].currentValue + drift).clamp(16.0, 30.0);
 
-        _devices[0] = _devices[0].copyWith(value: newValue);
+        _devices[0] = _devices[0].copyWith(currentValue: newValue);
       }
 
       yield List.from(_devices);

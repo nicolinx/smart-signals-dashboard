@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:signals_flutter/signals_flutter.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
 import 'package:smart_signals_dashboard/src/presentation/controllers/dashboard_controller.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/analysis_card.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/avatar_widget.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/device_card.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   final DashboardController controller;
 
   const DashboardScreen({super.key, required this.controller});
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final controller = widget.controller;
+
     return Scaffold(
       backgroundColor: AppTheme.background,
 
@@ -22,18 +36,24 @@ class DashboardScreen extends StatelessWidget {
           children: [
             HeaderSection(),
             SizedBox(height: 36),
-            IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(child: DeviceCard()),
-                  const SizedBox(width: 20),
-                  Expanded(child: DeviceCard()),
-                  const SizedBox(width: 20),
-                  Expanded(child: AnalysisCard()),
-                ],
-              ),
-            ),
+            Watch((_) {
+              if (controller.devices.isEmpty) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(child: DeviceCard(device: controller.devices[0])),
+                    const SizedBox(width: 20),
+                    Expanded(child: DeviceCard(device: controller.devices[1])),
+                    const SizedBox(width: 20),
+                    Expanded(child: AnalysisCard()),
+                  ],
+                ),
+              );
+            }),
             FooterSection(),
           ],
         ),
@@ -123,7 +143,7 @@ class FooterSection extends StatelessWidget {
                 text: "FLUTTER",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: AppTheme.accentBlueLight,
+                  color: AppTheme.accentBlue,
                 ),
               ),
               const TextSpan(text: " • "),

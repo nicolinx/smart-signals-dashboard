@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
+import 'package:smart_signals_dashboard/src/domain/entities/device_entity.dart';
 
 class DeviceCard extends StatelessWidget {
-  const DeviceCard({super.key});
+  final DeviceEntity device;
+
+  const DeviceCard({super.key, required this.device});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +25,15 @@ class DeviceCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: AppTheme.accentBlue,
+                  color: _getAccentColor,
                   borderRadius: .circular(8),
                 ),
-                child: Icon(Icons.ac_unit, color: Colors.white, size: 32),
+                child: Icon(_getIcon, color: Colors.white, size: 32),
               ),
               Switch(
-                activeTrackColor: AppTheme.accentBlue,
+                activeTrackColor: _getAccentColor,
                 activeThumbColor: Colors.white,
-                value: false,
+                value: device.isOn,
                 onChanged: (val) {},
               ),
             ],
@@ -38,12 +41,9 @@ class DeviceCard extends StatelessWidget {
 
           const SizedBox(height: 32),
 
+          Text(device.name, style: TextStyle(fontWeight: .bold, fontSize: 16)),
           Text(
-            'Air Conditioner',
-            style: TextStyle(fontWeight: .bold, fontSize: 16),
-          ),
-          Text(
-            'Living Room • Cooling',
+            '${device.room}${device.type == .ac ? ' (Now: ${device.displayCurrent})' : ''}',
             style: .new(
               fontWeight: .w500,
               fontSize: 14,
@@ -57,15 +57,15 @@ class DeviceCard extends StatelessWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               Text(
-                'Target Temperature',
+                device.valueName,
                 style: .new(fontWeight: .w500, fontSize: 14),
               ),
               Text(
-                '22°C',
+                device.displayTarget,
                 style: .new(
                   fontWeight: .bold,
                   fontSize: 14,
-                  color: AppTheme.accentBlueLight,
+                  color: _getAccentColor,
                 ),
               ),
             ],
@@ -74,13 +74,43 @@ class DeviceCard extends StatelessWidget {
           const SizedBox(height: 8),
 
           Slider(
-            activeColor: AppTheme.accentBlue,
+            min: minSlider,
+            max: maxSlider,
+            activeColor: _getAccentColor,
             padding: .zero,
-            value: 0.5,
+            value: device.targetValue,
             onChanged: (_) {},
           ),
         ],
       ),
     );
   }
+
+  IconData get _getIcon {
+    switch (device.type) {
+      case DeviceType.ac:
+        return Icons.ac_unit_rounded;
+      case DeviceType.light:
+        return Icons.lightbulb_outlined;
+    }
+  }
+
+  Color get _getAccentColor {
+    switch (device.type) {
+      case DeviceType.ac:
+        return AppTheme.accentBlue;
+      case DeviceType.light:
+        return AppTheme.accentAmber;
+    }
+  }
+
+  double get minSlider => switch (device.type) {
+    DeviceType.ac => 16.0,
+    DeviceType.light => 0.0,
+  };
+
+  double get maxSlider => switch (device.type) {
+    DeviceType.ac => 30.0,
+    DeviceType.light => 100.0,
+  };
 }
