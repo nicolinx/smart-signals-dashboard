@@ -26,12 +26,10 @@ class DeviceModel {
   double get currentWatt {
     if (!isOn) return 0.0;
 
-    switch (type) {
-      case DeviceType.ac:
-        return 150.0 + ((30 - currentValue) * 20.0);
-      case DeviceType.light:
-        return 40.0 * (currentValue / 100.0);
-    }
+    return switch (type) {
+      DeviceType.ac => 150.0 + ((30 - currentValue) * 20.0),
+      DeviceType.light => 40.0 * (targetValue / 100.0),
+    };
   }
 
   String get displayTarget => '${targetValue.toInt()}$valueUnit';

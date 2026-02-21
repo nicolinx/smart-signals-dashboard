@@ -31,8 +31,6 @@ class DashboardViewModel {
 
   ListSignal<DeviceModel> get devices => _devices;
 
-  late final _devicesConnection = connect(devices);
-
   DashboardViewModel() {
     _startDriftSimulation();
   }
@@ -53,6 +51,22 @@ class DashboardViewModel {
     });
   }
 
+  late final totalConsumption = computed(() {
+    final total = devices.fold<double>(
+      0,
+      (sum, device) => sum + device.currentWatt,
+    );
+    return total.toStringAsFixed(1);
+  });
+
+  late final efficiencyScore = computed(() {
+    double totalWatt = double.parse(totalConsumption.value);
+    if (totalWatt == 0) return 100;
+
+    double score = (1 - (totalWatt / 500)).clamp(0, 1) * 100;
+    return score.toInt();
+  });
+
   void updateDevice(int id, {bool? isOn, double? targetValue}) {
     final index = _devices.indexWhere((d) => d.id == id);
     if (index != -1) {
@@ -61,9 +75,5 @@ class DashboardViewModel {
         targetValue: targetValue,
       );
     }
-  }
-
-  void dispose() {
-    _devicesConnection.dispose();
   }
 }

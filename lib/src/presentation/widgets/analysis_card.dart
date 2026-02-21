@@ -3,7 +3,9 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
 
 class AnalysisCard extends StatelessWidget {
-  const AnalysisCard({super.key});
+  final int score;
+
+  const AnalysisCard({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class AnalysisCard extends StatelessWidget {
             textAlign: .center,
           ),
           Text(
-            '92%',
+            '$score%',
             style: TextStyle(
               fontWeight: .bold,
               fontSize: 56,

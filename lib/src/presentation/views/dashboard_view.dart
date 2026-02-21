@@ -17,31 +17,20 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView> {
   @override
-  void dispose() {
-    widget.viewModel.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final viewModel = widget.viewModel;
 
     return Scaffold(
       backgroundColor: AppTheme.background,
-
       body: Padding(
         padding: .all(36),
-        child: Column(
-          crossAxisAlignment: .stretch,
-          children: [
-            HeaderSection(),
-            SizedBox(height: 36),
-            Watch((_) {
-              if (viewModel.devices.isEmpty) {
-                return const Center(child: CircularProgressIndicator());
-              }
-
-              return IntrinsicHeight(
+        child: Watch(
+          (_) => Column(
+            crossAxisAlignment: .stretch,
+            children: [
+              HeaderSection(totalConsumption: viewModel.totalConsumption),
+              SizedBox(height: 36),
+              IntrinsicHeight(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -73,13 +62,17 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     const SizedBox(width: 20),
-                    Expanded(child: AnalysisCard()),
+                    Expanded(
+                      child: AnalysisCard(
+                        score: viewModel.efficiencyScore.value,
+                      ),
+                    ),
                   ],
                 ),
-              );
-            }),
-            FooterSection(),
-          ],
+              ),
+              FooterSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -87,7 +80,9 @@ class _DashboardViewState extends State<DashboardView> {
 }
 
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+  final ReadonlySignal<String> totalConsumption;
+
+  const HeaderSection({super.key, required this.totalConsumption});
 
   @override
   Widget build(BuildContext context) {
@@ -124,14 +119,16 @@ class HeaderSection extends StatelessWidget {
                     color: AppTheme.textGrey,
                   ),
                 ),
-                Text(
-                  '248.5 W',
-                  style: .new(
-                    fontWeight: .bold,
-                    fontSize: 32,
-                    color: AppTheme.accentGreen,
-                  ),
-                ),
+                Watch((_) {
+                  return Text(
+                    '${totalConsumption.value} W',
+                    style: .new(
+                      fontWeight: .bold,
+                      fontSize: 32,
+                      color: AppTheme.accentGreen,
+                    ),
+                  );
+                }),
               ],
             ),
             SizedBox(width: 12),
