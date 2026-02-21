@@ -11,7 +11,7 @@ class DeviceRepository {
       type: DeviceType.ac,
       currentValue: 22.0,
       targetValue: 22.0,
-      isOn: true,
+      isOn: false,
     ),
     const DeviceEntity(
       id: 2,
@@ -40,6 +40,16 @@ class DeviceRepository {
       }
 
       yield List.from(_devices);
+    }
+  }
+
+  void updateDevice(int id, {bool? isOn, double? targetValue}) {
+    final index = _devices.indexWhere((d) => d.id == id);
+    if (index != -1) {
+      _devices[index] = _devices[index].copyWith(
+        isOn: isOn,
+        targetValue: targetValue,
+      );
     }
   }
 }

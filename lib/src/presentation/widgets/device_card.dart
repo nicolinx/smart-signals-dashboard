@@ -4,11 +4,20 @@ import 'package:smart_signals_dashboard/src/domain/entities/device_entity.dart';
 
 class DeviceCard extends StatelessWidget {
   final DeviceEntity device;
+  final Function(bool value) onToggleChanged;
 
-  const DeviceCard({super.key, required this.device});
+  const DeviceCard({
+    super.key,
+    required this.device,
+    required this.onToggleChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final bool isActive = device.isOn;
+    final Color activeColor = _getAccentColor;
+    final Color disabledColor = AppTheme.textGrey.withValues(alpha: 0.2);
+
     return Container(
       padding: .all(20),
       decoration: BoxDecoration(
@@ -34,7 +43,9 @@ class DeviceCard extends StatelessWidget {
                 activeTrackColor: _getAccentColor,
                 activeThumbColor: Colors.white,
                 value: device.isOn,
-                onChanged: (val) {},
+                onChanged: (val) {
+                  onToggleChanged(val);
+                },
               ),
             ],
           ),

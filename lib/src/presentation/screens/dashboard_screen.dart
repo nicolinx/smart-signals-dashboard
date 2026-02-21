@@ -45,9 +45,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Expanded(child: DeviceCard(device: controller.devices[0])),
+                    Expanded(
+                      child: DeviceCard(
+                        device: controller.devices[0],
+                        onToggleChanged: (value) => controller.handleUpdate(
+                          controller.devices[0].id,
+                          isOn: value,
+                        ),
+                      ),
+                    ),
                     const SizedBox(width: 20),
-                    Expanded(child: DeviceCard(device: controller.devices[1])),
+                    Expanded(
+                      child: DeviceCard(
+                        device: controller.devices[1],
+                        onToggleChanged: (value) => controller.handleUpdate(
+                          controller.devices[1].id,
+                          isOn: value,
+                        ),
+                      ),
+                    ),
                     const SizedBox(width: 20),
                     Expanded(child: AnalysisCard()),
                   ],
