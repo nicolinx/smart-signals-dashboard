@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const Color background = Color(0xFF0F1115);
@@ -17,31 +18,16 @@ class AppTheme {
       scaffoldBackgroundColor: background,
       useMaterial3: true,
 
-      textTheme: const TextTheme(
-        headlineMedium: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          letterSpacing: -0.5,
-        ),
-        titleMedium: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white70,
-        ),
-        bodySmall: TextStyle(
-          fontSize: 12,
-          color: Colors.white38,
-          letterSpacing: 1.1,
-        ),
-      ),
+      textTheme: GoogleFonts.poppinsTextTheme(
+        ThemeData(brightness: Brightness.dark).textTheme,
+      ).apply(bodyColor: Colors.white, displayColor: Colors.white),
 
       cardTheme: .new(
         color: cardBg,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: BorderSide(color: Colors.white.withOpacity(0.05)),
+          side: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
         ),
       ),
     );
@@ -49,18 +35,20 @@ class AppTheme {
 
   static BoxDecoration glassBox({Color? glowColor, bool isActive = false}) {
     return BoxDecoration(
-      color: isActive ? (glowColor ?? accentBlue).withOpacity(0.1) : cardBg,
+      color: isActive
+          ? (glowColor ?? accentBlue).withValues(alpha: 0.1)
+          : cardBg,
       borderRadius: BorderRadius.circular(24),
       border: Border.all(
         color: isActive
-            ? (glowColor ?? accentBlue).withOpacity(0.5)
-            : Colors.white.withOpacity(0.05),
+            ? (glowColor ?? accentBlue).withValues(alpha: 0.5)
+            : Colors.white.withValues(alpha: 0.05),
         width: 1.5,
       ),
       boxShadow: [
         if (isActive)
           BoxShadow(
-            color: (glowColor ?? accentBlue).withOpacity(0.2),
+            color: (glowColor ?? accentBlue).withValues(alpha: 0.2),
             blurRadius: 20,
             spreadRadius: 2,
           ),

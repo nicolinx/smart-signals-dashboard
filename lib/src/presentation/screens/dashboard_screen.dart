@@ -36,7 +36,7 @@ class HeaderSection extends StatelessWidget {
           children: [
             Text(
               'SmartNode Center',
-              style: .new(fontWeight: .w900, fontSize: 36),
+              style: TextStyle(fontWeight: .bold, fontSize: 36),
             ),
             Text(
               'Manage your local state with Signals.',
@@ -62,7 +62,7 @@ class HeaderSection extends StatelessWidget {
             Text(
               '248.5 W',
               style: .new(
-                fontWeight: .w900,
+                fontWeight: .bold,
                 fontSize: 40,
                 color: AppTheme.accentGreen,
               ),
