@@ -79,3 +79,17 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 }
+
+class DashboardLayout extends StatefulWidget {
+  const DashboardLayout({super.key});
+
+  @override
+  State<DashboardLayout> createState() => _DashboardLayoutState();
+}
+
+class _DashboardLayoutState extends State<DashboardLayout> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
