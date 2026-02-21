@@ -60,11 +60,11 @@ class HeaderSection extends StatelessWidget {
               ),
             ),
             Text(
-              'Manage your local state with Signals.',
+              '248.5 W',
               style: .new(
-                fontWeight: .w500,
-                fontSize: 16,
-                color: AppTheme.textGrey,
+                fontWeight: .w900,
+                fontSize: 40,
+                color: AppTheme.accentGreen,
               ),
             ),
           ],
