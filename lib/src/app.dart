@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
     final controller = DashboardController(watchUC);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: DashboardScreen(controller: controller),
     );

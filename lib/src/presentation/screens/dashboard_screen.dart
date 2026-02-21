@@ -34,6 +34,7 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
+            FooterSection(),
           ],
         ),
       ),
@@ -72,7 +73,7 @@ class HeaderSection extends StatelessWidget {
               crossAxisAlignment: .end,
               children: [
                 Text(
-                  'TOTAL CONSUMTION',
+                  'TOTAL CONSUMPTION',
                   style: .new(
                     fontWeight: .w500,
                     fontSize: 14,
@@ -91,6 +92,77 @@ class HeaderSection extends StatelessWidget {
             ),
             SizedBox(width: 12),
             AvatarWidget(),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class FooterSection extends StatelessWidget {
+  const FooterSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: .stretch,
+      children: [
+        Divider(color: AppTheme.border, height: 64),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            style: const TextStyle(
+              fontSize: 12,
+              letterSpacing: 1.2,
+              fontWeight: FontWeight.w300,
+              color: AppTheme.textGrey,
+            ),
+            children: [
+              const TextSpan(text: "BUILT WITH "),
+              TextSpan(
+                text: "FLUTTER",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.accentBlueLight,
+                ),
+              ),
+              const TextSpan(text: " • "),
+              TextSpan(
+                text: "SIGNALS",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.accentGreen,
+                ),
+              ),
+              const TextSpan(text: " • "),
+              const TextSpan(
+                text: "CLEAN ARCHITECTURE",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 6),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: .center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Icon(
+                Icons.terminal_rounded,
+                size: 13,
+                color: AppTheme.textGrey.withValues(alpha: 0.6),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              "github.com/nicolinx",
+              style: TextStyle(
+                fontSize: 12,
+                color: AppTheme.textGrey.withValues(alpha: 0.6),
+              ),
+            ),
           ],
         ),
       ],
