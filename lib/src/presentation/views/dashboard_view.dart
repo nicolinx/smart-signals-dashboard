@@ -52,6 +52,10 @@ class _DashboardViewState extends State<DashboardView> {
                           viewModel.devices[0].id,
                           isOn: value,
                         ),
+                        onSliderChanged: (value) => viewModel.updateDevice(
+                          viewModel.devices[0].id,
+                          targetValue: value,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 20),
@@ -61,6 +65,10 @@ class _DashboardViewState extends State<DashboardView> {
                         onToggleChanged: (value) => viewModel.updateDevice(
                           viewModel.devices[1].id,
                           isOn: value,
+                        ),
+                        onSliderChanged: (value) => viewModel.updateDevice(
+                          viewModel.devices[1].id,
+                          targetValue: value,
                         ),
                       ),
                     ),
