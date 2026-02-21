@@ -24,55 +24,49 @@ class _DashboardViewState extends State<DashboardView> {
       backgroundColor: AppTheme.background,
       body: Padding(
         padding: .all(36),
-        child: Watch(
-          (_) => Column(
-            crossAxisAlignment: .stretch,
-            children: [
-              HeaderSection(totalConsumption: viewModel.totalConsumption),
-              SizedBox(height: 36),
-              IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: DeviceCard(
+        child: Column(
+          crossAxisAlignment: .stretch,
+          children: [
+            HeaderSection(totalConsumption: viewModel.totalConsumption),
+            SizedBox(height: 36),
+            IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: Watch(
+                      (_) => DeviceCard(
                         device: viewModel.devices[0],
-                        onToggleChanged: (value) => viewModel.updateDevice(
-                          viewModel.devices[0].id,
-                          isOn: value,
-                        ),
-                        onSliderChanged: (value) => viewModel.updateDevice(
-                          viewModel.devices[0].id,
-                          targetValue: value,
-                        ),
+                        onToggleChanged: (val) =>
+                            viewModel.updateDevice(1, isOn: val),
+                        onSliderChanged: (val) =>
+                            viewModel.updateDevice(1, targetValue: val),
                       ),
                     ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: DeviceCard(
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Watch(
+                      (_) => DeviceCard(
                         device: viewModel.devices[1],
-                        onToggleChanged: (value) => viewModel.updateDevice(
-                          viewModel.devices[1].id,
-                          isOn: value,
-                        ),
-                        onSliderChanged: (value) => viewModel.updateDevice(
-                          viewModel.devices[1].id,
-                          targetValue: value,
-                        ),
+                        onToggleChanged: (val) =>
+                            viewModel.updateDevice(2, isOn: val),
+                        onSliderChanged: (val) =>
+                            viewModel.updateDevice(2, targetValue: val),
                       ),
                     ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: AnalysisCard(
-                        score: viewModel.efficiencyScore.value,
-                      ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: AnalysisCard(
+                      efficiencyScore: viewModel.efficiencyScore,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              FooterSection(),
-            ],
-          ),
+            ),
+            FooterSection(),
+          ],
         ),
       ),
     );
@@ -172,13 +166,16 @@ class FooterSection extends StatelessWidget {
                 text: "SIGNALS",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: AppTheme.accentGreen,
+                  color: AppTheme.accentAmber,
                 ),
               ),
               const TextSpan(text: " • "),
               const TextSpan(
                 text: "MVVM PATTERN",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.accentGreen,
+                ),
               ),
             ],
           ),
@@ -201,7 +198,7 @@ class FooterSection extends StatelessWidget {
               "github.com/nicolinx",
               style: TextStyle(
                 fontSize: 12,
-                color: AppTheme.textGrey.withValues(alpha: 0.6),
+                color: AppTheme.textGrey.withValues(alpha: 0.75),
               ),
             ),
           ],
