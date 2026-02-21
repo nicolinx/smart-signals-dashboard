@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
 import 'package:smart_signals_dashboard/src/presentation/controllers/dashboard_controller.dart';
+import 'package:smart_signals_dashboard/src/presentation/widgets/analysis_card.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/avatar_widget.dart';
+import 'package:smart_signals_dashboard/src/presentation/widgets/device_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   final DashboardController controller;
@@ -17,7 +19,22 @@ class DashboardScreen extends StatelessWidget {
         padding: .all(36),
         child: Column(
           crossAxisAlignment: .stretch,
-          children: [HeaderSection()],
+          children: [
+            HeaderSection(),
+            SizedBox(height: 36),
+            IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(child: DeviceCard()),
+                  const SizedBox(width: 20),
+                  Expanded(child: DeviceCard()),
+                  const SizedBox(width: 20),
+                  Expanded(child: AnalysisCard()),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
