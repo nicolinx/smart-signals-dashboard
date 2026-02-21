@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
 
 class AnalysisCard extends StatelessWidget {
@@ -7,7 +8,7 @@ class AnalysisCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: .all(16),
+      padding: .all(20),
       decoration: BoxDecoration(
         color: AppTheme.cardBg,
         borderRadius: .circular(20),
@@ -19,65 +20,51 @@ class AnalysisCard extends StatelessWidget {
           Row(
             mainAxisAlignment: .spaceBetween,
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppTheme.accentBlue,
-                  borderRadius: .circular(8),
-                ),
-                child: Icon(Icons.ac_unit, color: Colors.white, size: 32),
-              ),
-              Switch(
-                activeTrackColor: AppTheme.accentBlue,
-                activeThumbColor: Colors.white,
-                value: false,
-                onChanged: (val) {},
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 32),
-
-          Text(
-            'Air Conditioner',
-            style: TextStyle(fontWeight: .bold, fontSize: 16),
-          ),
-          Text(
-            'Living Room • Cooling',
-            style: .new(
-              fontWeight: .w500,
-              fontSize: 14,
-              color: AppTheme.textGrey,
-            ),
-          ),
-
-          const SizedBox(height: 32),
-
-          Row(
-            mainAxisAlignment: .spaceBetween,
-            children: [
               Text(
-                'Target Temperature',
-                style: .new(fontWeight: .w500, fontSize: 14),
-              ),
-              Text(
-                '22°C',
-                style: .new(
+                'REAL-TIME ANALYSIS',
+                style: TextStyle(
                   fontWeight: .bold,
                   fontSize: 14,
-                  color: AppTheme.accentBlueLight,
+                  color: AppTheme.accentGreen,
+                  letterSpacing: 2,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+                width: 20,
+                child: LoadingIndicator(
+                  indicatorType: Indicator.ballScale,
+                  colors: const [AppTheme.accentGreen],
+                  strokeWidth: 2,
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 32),
 
-          Slider(
-            activeColor: AppTheme.accentBlue,
-            padding: .zero,
-            value: 0.5,
-            onChanged: (_) {},
+          Text(
+            'Energy Efficiency',
+            style: TextStyle(fontWeight: .bold, fontSize: 18),
+            textAlign: .center,
+          ),
+          Text(
+            '92%',
+            style: TextStyle(
+              fontWeight: .bold,
+              fontSize: 56,
+              color: AppTheme.accentGreen,
+            ),
+            textAlign: .center,
+          ),
+          Text(
+            'Optimized by Signals computed',
+            style: TextStyle(
+              fontSize: 12,
+              color: AppTheme.textGrey,
+              fontStyle: .italic,
+            ),
+            textAlign: .center,
           ),
         ],
       ),

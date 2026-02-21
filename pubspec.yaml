@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^8.0.2
+  loading_indicator: ^3.1.1
   signals_flutter: ^6.3.0
 
 dev_dependencies:

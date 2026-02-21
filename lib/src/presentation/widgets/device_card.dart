@@ -7,7 +7,7 @@ class DeviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: .all(16),
+      padding: .all(20),
       decoration: BoxDecoration(
         color: AppTheme.cardBg,
         borderRadius: .circular(20),
