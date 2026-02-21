@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
-import 'package:smart_signals_dashboard/src/domain/entities/device_entity.dart';
+import 'package:smart_signals_dashboard/src/domain/device_entity.dart';
 
 class DeviceCard extends StatelessWidget {
   final DeviceEntity device;
@@ -14,10 +14,6 @@ class DeviceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isActive = device.isOn;
-    final Color activeColor = _getAccentColor;
-    final Color disabledColor = AppTheme.textGrey.withValues(alpha: 0.2);
-
     return Container(
       padding: .all(20),
       decoration: BoxDecoration(

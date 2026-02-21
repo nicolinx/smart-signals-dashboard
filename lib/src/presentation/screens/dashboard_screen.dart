@@ -48,7 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Expanded(
                       child: DeviceCard(
                         device: controller.devices[0],
-                        onToggleChanged: (value) => controller.handleUpdate(
+                        onToggleChanged: (value) => controller.updateDevice(
                           controller.devices[0].id,
                           isOn: value,
                         ),
@@ -58,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Expanded(
                       child: DeviceCard(
                         device: controller.devices[1],
-                        onToggleChanged: (value) => controller.handleUpdate(
+                        onToggleChanged: (value) => controller.updateDevice(
                           controller.devices[1].id,
                           isOn: value,
                         ),
