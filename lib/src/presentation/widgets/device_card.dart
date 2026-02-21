@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
-import 'package:smart_signals_dashboard/src/domain/device_entity.dart';
+import 'package:smart_signals_dashboard/src/domain/models/device_model.dart';
 
 class DeviceCard extends StatelessWidget {
-  final DeviceEntity device;
+  final DeviceModel device;
   final Function(bool value) onToggleChanged;
 
   const DeviceCard({

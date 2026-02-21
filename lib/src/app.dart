@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
-import 'package:smart_signals_dashboard/src/presentation/controllers/dashboard_controller.dart';
-import 'package:smart_signals_dashboard/src/presentation/screens/dashboard_screen.dart';
+import 'package:smart_signals_dashboard/src/presentation/view_models/dashboard_view_model.dart';
+import 'package:smart_signals_dashboard/src/presentation/views/dashboard_view.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -9,12 +9,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Use Dependency Injection
-    final controller = DashboardController();
+    final viewModel = DashboardViewModel();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: DashboardScreen(controller: controller),
+      home: DashboardView(viewModel: viewModel),
     );
   }
 }

@@ -1,6 +1,6 @@
 enum DeviceType { ac, light }
 
-class DeviceEntity {
+class DeviceModel {
   final int id;
   final String name;
   final String room;
@@ -11,7 +11,7 @@ class DeviceEntity {
   final double currentValue;
   final double targetValue;
 
-  const DeviceEntity({
+  const DeviceModel({
     required this.id,
     required this.name,
     required this.room,
@@ -37,12 +37,12 @@ class DeviceEntity {
   String get displayTarget => '${targetValue.toInt()}$valueUnit';
   String get displayCurrent => '${currentValue.toStringAsFixed(1)}$valueUnit';
 
-  DeviceEntity copyWith({
+  DeviceModel copyWith({
     bool? isOn,
     double? targetValue,
     double? currentValue,
   }) {
-    return DeviceEntity(
+    return DeviceModel(
       id: id,
       name: name,
       room: room,

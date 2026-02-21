@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:signals_flutter/signals_flutter.dart';
-import 'package:smart_signals_dashboard/src/domain/device_entity.dart';
+import 'package:smart_signals_dashboard/src/domain/models/device_model.dart';
 
-class DashboardController {
-  final _devices = listSignal<DeviceEntity>([
-    const DeviceEntity(
+class DashboardViewModel {
+  final _devices = listSignal<DeviceModel>([
+    const DeviceModel(
       id: 1,
       name: 'Air Conditioner',
       room: 'Living Room • Cooling',
@@ -16,7 +16,7 @@ class DashboardController {
       currentValue: 24.5,
       isOn: true,
     ),
-    const DeviceEntity(
+    const DeviceModel(
       id: 2,
       name: 'Smart Lighting',
       room: 'Kitchen • Intensity',
@@ -29,11 +29,11 @@ class DashboardController {
     ),
   ]);
 
-  ListSignal<DeviceEntity> get devices => _devices;
+  ListSignal<DeviceModel> get devices => _devices;
 
   late final _devicesConnection = connect(devices);
 
-  DashboardController() {
+  DashboardViewModel() {
     _startDriftSimulation();
   }
 

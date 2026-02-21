@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:signals_flutter/signals_flutter.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
-import 'package:smart_signals_dashboard/src/presentation/controllers/dashboard_controller.dart';
+import 'package:smart_signals_dashboard/src/presentation/view_models/dashboard_view_model.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/analysis_card.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/avatar_widget.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/device_card.dart';
 
-class DashboardScreen extends StatefulWidget {
-  final DashboardController controller;
+class DashboardView extends StatefulWidget {
+  final DashboardViewModel viewModel;
 
-  const DashboardScreen({super.key, required this.controller});
+  const DashboardView({super.key, required this.viewModel});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<DashboardView> createState() => _DashboardViewState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardViewState extends State<DashboardView> {
   @override
   void dispose() {
-    widget.controller.dispose();
+    widget.viewModel.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = widget.controller;
+    final viewModel = widget.viewModel;
 
     return Scaffold(
       backgroundColor: AppTheme.background,
@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             HeaderSection(),
             SizedBox(height: 36),
             Watch((_) {
-              if (controller.devices.isEmpty) {
+              if (viewModel.devices.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
 
@@ -47,9 +47,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     Expanded(
                       child: DeviceCard(
-                        device: controller.devices[0],
-                        onToggleChanged: (value) => controller.updateDevice(
-                          controller.devices[0].id,
+                        device: viewModel.devices[0],
+                        onToggleChanged: (value) => viewModel.updateDevice(
+                          viewModel.devices[0].id,
                           isOn: value,
                         ),
                       ),
@@ -57,9 +57,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     const SizedBox(width: 20),
                     Expanded(
                       child: DeviceCard(
-                        device: controller.devices[1],
-                        onToggleChanged: (value) => controller.updateDevice(
-                          controller.devices[1].id,
+                        device: viewModel.devices[1],
+                        onToggleChanged: (value) => viewModel.updateDevice(
+                          viewModel.devices[1].id,
                           isOn: value,
                         ),
                       ),
@@ -172,7 +172,7 @@ class FooterSection extends StatelessWidget {
               ),
               const TextSpan(text: " • "),
               const TextSpan(
-                text: "CLEAN ARCHITECTURE",
+                text: "MVVM PATTERN",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
