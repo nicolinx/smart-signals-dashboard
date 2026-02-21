@@ -8,7 +8,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Use Dependency Injection
     final viewModel = DashboardViewModel();
 
     return MaterialApp(

@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:signals_flutter/signals_flutter.dart';
 import 'package:smart_signals_dashboard/src/domain/models/device_model.dart';
 
 class DashboardViewModel {
+  bool _isAlertActive = false;
+  Timer? _driftTimer;
+
   final _devices = listSignal<DeviceModel>([
     const DeviceModel(
       id: 1,
@@ -33,10 +37,11 @@ class DashboardViewModel {
 
   DashboardViewModel() {
     _startDriftSimulation();
+    _setupAlerts();
   }
 
   void _startDriftSimulation() {
-    Timer.periodic(const Duration(seconds: 3), (_) {
+    _driftTimer = Timer.periodic(const Duration(seconds: 3), (_) {
       final index = _devices.indexWhere((d) => d.type == DeviceType.ac);
       if (index != -1 && _devices[index].isOn) {
         final device = _devices[index];
@@ -75,5 +80,21 @@ class DashboardViewModel {
         targetValue: targetValue,
       );
     }
+  }
+
+  void _setupAlerts() {
+    effect(() {
+      final score = efficiencyScore.value;
+      if (score < 50 && !_isAlertActive) {
+        log("⚠️ WARNING: High power usage detected!");
+        _isAlertActive = true;
+      } else if (score >= 50) {
+        _isAlertActive = false;
+      }
+    });
+  }
+
+  void dispose() {
+    _driftTimer?.cancel();
   }
 }

@@ -81,7 +81,7 @@ class DeviceCard extends StatelessWidget {
                   style: .new(fontWeight: .w500, fontSize: 14),
                 ),
                 Text(
-                  device.displayTarget,
+                  isActive ? device.displayTarget : "--",
                   style: .new(
                     fontWeight: .bold,
                     fontSize: 14,
@@ -130,7 +130,7 @@ class DeviceCard extends StatelessWidget {
 
   double get minSlider => switch (device.type) {
     DeviceType.ac => 16.0,
-    DeviceType.light => 0.0,
+    DeviceType.light => 1.0,
   };
 
   double get maxSlider => switch (device.type) {
