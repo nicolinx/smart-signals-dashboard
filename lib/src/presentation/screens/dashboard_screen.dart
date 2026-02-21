@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
 import 'package:smart_signals_dashboard/src/presentation/controllers/dashboard_controller.dart';
+import 'package:smart_signals_dashboard/src/presentation/widgets/avatar_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
   final DashboardController controller;
@@ -36,7 +37,7 @@ class HeaderSection extends StatelessWidget {
           children: [
             Text(
               'SmartNode Center',
-              style: TextStyle(fontWeight: .bold, fontSize: 36),
+              style: TextStyle(fontWeight: .bold, fontSize: 32),
             ),
             Text(
               'Manage your local state with Signals.',
@@ -48,25 +49,31 @@ class HeaderSection extends StatelessWidget {
             ),
           ],
         ),
-        Column(
-          crossAxisAlignment: .end,
+        Row(
           children: [
-            Text(
-              'TOTAL CONSUMTION',
-              style: .new(
-                fontWeight: .w500,
-                fontSize: 16,
-                color: AppTheme.textGrey,
-              ),
+            Column(
+              crossAxisAlignment: .end,
+              children: [
+                Text(
+                  'TOTAL CONSUMTION',
+                  style: .new(
+                    fontWeight: .w500,
+                    fontSize: 14,
+                    color: AppTheme.textGrey,
+                  ),
+                ),
+                Text(
+                  '248.5 W',
+                  style: .new(
+                    fontWeight: .bold,
+                    fontSize: 32,
+                    color: AppTheme.accentGreen,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '248.5 W',
-              style: .new(
-                fontWeight: .bold,
-                fontSize: 40,
-                color: AppTheme.accentGreen,
-              ),
-            ),
+            SizedBox(width: 12),
+            AvatarWidget(),
           ],
         ),
       ],
