@@ -18,7 +18,7 @@ A modern Smart Home Dashboard built with **Flutter** to demonstrate high-perform
 ## 🚀 Quick Start
 
 ```bash
-git clone [https://github.com/nicolinx/smart_signals_dashboard.git](https://github.com/nicolinx/smart_signals_dashboard.git)
+git clone https://github.com/nicolinx/smart_signals_dashboard.git
 cd smart_signals_dashboard
 flutter pub get
 flutter run
