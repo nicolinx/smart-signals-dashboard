@@ -16,6 +16,9 @@ class DeviceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 7. PRESENTATION: This widget is a "dumb widget".
+    // It doesn't know about Signals; it only renders the immutable
+    // DeviceModel passed down by the Watch widget in DashboardView.
     final bool isActive = device.isOn;
 
     return AnimatedContainer(

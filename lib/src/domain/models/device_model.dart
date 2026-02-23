@@ -23,6 +23,8 @@ class DeviceModel {
     this.targetValue = 0,
   });
 
+  // Business logic to calculate wattage.
+  // This value is used by the 'totalConsumption' computed signal in the ViewModel.
   double get currentWatt {
     if (!isOn) return 0.0;
 
@@ -32,9 +34,12 @@ class DeviceModel {
     };
   }
 
+  // Helper getters for UI display
   String get displayTarget => '${targetValue.toInt()}$valueUnit';
   String get displayCurrent => '${currentValue.toStringAsFixed(1)}$valueUnit';
 
+  // Immutable update pattern.
+  // Essential for Signals to detect changes when we replace an item in ListSignal.
   DeviceModel copyWith({
     bool? isOn,
     double? targetValue,

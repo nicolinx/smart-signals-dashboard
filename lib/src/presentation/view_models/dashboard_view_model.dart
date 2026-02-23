@@ -8,6 +8,8 @@ class DashboardViewModel {
   bool _isAlertActive = false;
   Timer? _driftTimer;
 
+  // 1. STATE: Using listSignal to make the entire collection reactive.
+  // Any change to an item inside this list will notify the UI automatically.
   final _devices = listSignal<DeviceModel>([
     const DeviceModel(
       id: 1,
@@ -40,6 +42,7 @@ class DashboardViewModel {
     _setupAlerts();
   }
 
+  // Simulation logic to mimic real-world AC temperature adjustment
   void _startDriftSimulation() {
     _driftTimer = Timer.periodic(const Duration(seconds: 3), (_) {
       final index = _devices.indexWhere((d) => d.type == DeviceType.ac);
@@ -56,6 +59,8 @@ class DashboardViewModel {
     });
   }
 
+  // 2. LOGIC: computed() caches the value and only re-calculates
+  // when the specific signals inside it (_devices or currentWatt) change.
   late final totalConsumption = computed(() {
     final total = devices.fold<double>(
       0,
@@ -64,6 +69,8 @@ class DashboardViewModel {
     return total.toStringAsFixed(1);
   });
 
+  // Another computed signal that depends on totalConsumption.
+  // This creates a reactive chain: Device Change -> Total Consumption -> Efficiency Score.
   late final efficiencyScore = computed(() {
     double totalWatt = double.parse(totalConsumption.value);
     if (totalWatt == 0) return 100;
@@ -82,6 +89,8 @@ class DashboardViewModel {
     }
   }
 
+  // 3. SIDE EFFECTS: effect() runs whenever efficiencyScore changes.
+  // Perfect for logging, showing snackbars, or triggering external analytics.
   void _setupAlerts() {
     effect(() {
       final score = efficiencyScore.value;

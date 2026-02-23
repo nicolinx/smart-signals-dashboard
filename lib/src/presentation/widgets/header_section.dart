@@ -4,6 +4,7 @@ import 'package:smart_signals_dashboard/src/core/theme.dart';
 import 'package:smart_signals_dashboard/src/presentation/widgets/avatar_widget.dart';
 
 class HeaderSection extends StatelessWidget {
+  // Consuming the total consumption as a ReadonlySignal for safety.
   final ReadonlySignal<String> totalConsumption;
 
   const HeaderSection({super.key, required this.totalConsumption});
@@ -43,6 +44,8 @@ class HeaderSection extends StatelessWidget {
                     color: AppTheme.textGrey,
                   ),
                 ),
+                // Using Watch here ensures that whenever any device's wattage changes,
+                // this specific text updates immediately without a full page refresh.
                 Watch((_) {
                   return Text(
                     '${totalConsumption.value} W',

@@ -4,6 +4,8 @@ import 'package:signals_flutter/signals_flutter.dart';
 import 'package:smart_signals_dashboard/src/core/theme.dart';
 
 class AnalysisCard extends StatelessWidget {
+  // 5. DATA FLOW: This widget consumes a ReadonlySignal.
+  // It can listen to the value but cannot modify it directly.
   final ReadonlySignal<int> efficiencyScore;
 
   const AnalysisCard({super.key, required this.efficiencyScore});
@@ -51,6 +53,9 @@ class AnalysisCard extends StatelessWidget {
             style: TextStyle(fontWeight: .bold, fontSize: 18),
             textAlign: .center,
           ),
+
+          // 6. UI REACTIVITY: Watch widget ensures the score and its status color
+          // update instantly whenever the efficiencyScore signal emits a new value.
           Watch(
             (_) => Column(
               crossAxisAlignment: .center,
@@ -88,6 +93,7 @@ class AnalysisCard extends StatelessWidget {
     );
   }
 
+  // Helper logic to dynamically change UI color based on the reactive score
   Color get _getStatusColor {
     Color statusColor = AppTheme.accentGreen;
     if (efficiencyScore.value < 50) {
