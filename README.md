@@ -2,6 +2,8 @@
 
 A modern Smart Home Dashboard built with **Flutter** to demonstrate high-performance state management using **Signals**.
 
+![SmartNode Demo](assets/demo.gif)
+
 ## ✨ Highlights
 
 - **Granular Reactivity**: Uses `listSignal` for real-time device updates without `setState`.
