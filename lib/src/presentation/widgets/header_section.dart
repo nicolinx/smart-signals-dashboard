@@ -5,7 +5,7 @@ import 'package:smart_signals_dashboard/src/presentation/widgets/avatar_widget.d
 
 class HeaderSection extends StatelessWidget {
   // Consuming the total consumption as a ReadonlySignal for safety.
-  final ReadonlySignal<String> totalConsumption;
+  final ReadonlySignal<double> totalConsumption;
 
   const HeaderSection({super.key, required this.totalConsumption});
 
@@ -48,7 +48,7 @@ class HeaderSection extends StatelessWidget {
                 // this specific text updates immediately without a full page refresh.
                 Watch((_) {
                   return Text(
-                    '${totalConsumption.value} W',
+                    '${totalConsumption.value.toStringAsFixed(1)} W',
                     style: .new(
                       fontWeight: .bold,
                       fontSize: 32,
