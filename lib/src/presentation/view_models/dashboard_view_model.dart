@@ -62,17 +62,14 @@ class DashboardViewModel {
   // 2. LOGIC: computed() caches the value and only re-calculates
   // when the specific signals inside it (_devices or currentWatt) change.
   late final totalConsumption = computed(() {
-    final total = devices.fold<double>(
-      0,
-      (sum, device) => sum + device.currentWatt,
-    );
-    return total.toStringAsFixed(1);
+    return devices.fold<double>(0, (sum, device) => sum + device.currentWatt);
   });
 
   // Another computed signal that depends on totalConsumption.
   // This creates a reactive chain: Device Change -> Total Consumption -> Efficiency Score.
   late final efficiencyScore = computed(() {
-    double totalWatt = double.parse(totalConsumption.value);
+    double totalWatt = totalConsumption.value;
+
     if (totalWatt == 0) return 100;
 
     double score = (1 - (totalWatt / 500)).clamp(0, 1) * 100;
